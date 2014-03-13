@@ -7,7 +7,7 @@ import scala.runtime.BoxedUnit;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-public class HelloAkkaJava {
+public class HelloAkka {
     public static class Greet implements Serializable {}
     public static class WhoToGreet implements Serializable {
         public final String who;
