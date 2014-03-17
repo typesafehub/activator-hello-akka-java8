@@ -9,12 +9,14 @@ import java.util.concurrent.TimeUnit;
 
 public class HelloAkka {
     public static class Greet implements Serializable {}
+
     public static class WhoToGreet implements Serializable {
         public final String who;
         public WhoToGreet(String who) {
             this.who = who;
         }
     }
+
     public static class Greeting implements Serializable {
         public final String message;
         public Greeting(String message) {
@@ -29,7 +31,6 @@ public class HelloAkka {
             return ReceiveBuilder.
                     match(WhoToGreet.class, message -> greeting = "hello, " + message.who).
                     match(Greet.class, message -> sender().tell(new Greeting(greeting), self())).
-                    matchAny(this::unhandled).
                     build();
         }
     }
@@ -66,10 +67,11 @@ public class HelloAkka {
         system.scheduler().schedule(Duration.Zero(), Duration.create(1, TimeUnit.SECONDS), greeter, new Greet(), system.dispatcher(), greetPrinter);
     }
 
-    public static class GreetPrinter extends UntypedActor {
-        public void onReceive(Object message) {
-            if (message instanceof Greeting)
-                System.out.println(((Greeting) message).message);
+    public static class GreetPrinter extends AbstractActor {
+        @Override public PartialFunction<Object, BoxedUnit> receive() {
+            return ReceiveBuilder.
+                    match(Greeting.class, message -> System.out.println(message.message)).
+                    build();
         }
     }
 }
