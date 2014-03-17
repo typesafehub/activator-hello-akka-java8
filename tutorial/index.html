@@ -112,7 +112,6 @@ public static class Greeter extends AbstractActor {
         return ReceiveBuilder.
             match(WhoToGreet.class, message -> greeting = "hello, " + message.who).
             match(Greet.class, message -> sender().tell(new Greeting(greeting), self())).
-            matchAny(this::unhandled).
             build();
     }
 }
