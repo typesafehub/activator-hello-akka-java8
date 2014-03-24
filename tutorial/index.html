@@ -150,7 +150,7 @@ public static class Greeter extends AbstractActor {
     in that it also acts as a container for your Actors, managing their life-cycles etc.  You create an Actor through the
     <code>actorOf</code> factory method. This method takes a configuration object called <code>Props</code> and a name.
     Actor (and ActorSystem) names are important in Akka, you use them for example when looking Actors up as well as when you
-    configure them in the <a href="http://doc.akka.io/docs/akka/2.3.0/general/configuration.html"  target="_blank">configuration
+    configure them in the <a href="http://doc.akka.io/docs/akka/2.3.1/general/configuration.html"  target="_blank">configuration
     file</a>, so you should take your time giving your Actors good names.
     </p>
     <p>
@@ -215,7 +215,7 @@ greeter.tell(new Greet(), self());
     <p>
     If you choose not to pass in a sender reference into the <code>tell</code> method, or forget it, then a reference to
     the 'dead-letter' Actor will be used. The 'dead-letter' Actor is where all unhandled messages end up, and
-    you can use Akka's <a href="http://doc.akka.io/docs/akka/2.3.0/java/event-bus.html" target="_blank">Event Bus</a> to subscribe on them.
+    you can use Akka's <a href="http://doc.akka.io/docs/akka/2.3.1/java/event-bus.html" target="_blank">Event Bus</a> to subscribe on them.
     </p>
 
     <h3>The 'sender' reference</h3>
@@ -310,7 +310,7 @@ System.out.println("Greeting: " + greeting.message);
     <p>
     The <a href="http://akka.io/docs/" target="_blank">Akka Documentation</a> explains each one of the topics covered
     in this tutorial in great depth, and much much more.  Check out the 
-    <a href="http://doc.akka.io/docs/akka/2.3.0/java.html" target="_blank">Java Manual</a> for more information
+    <a href="http://doc.akka.io/docs/akka/2.3.1/java.html" target="_blank">Java Manual</a> for more information
     using Akka with Java and Lambdas.
     </p>
     <p>
