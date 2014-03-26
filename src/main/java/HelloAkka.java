@@ -8,9 +8,12 @@ import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 public class HelloAkka {
-    public static class Greet implements Serializable {}
+    public static class Greet implements Serializable {
+        public static final long serialVersionUID = 1;
+    }
 
     public static class WhoToGreet implements Serializable {
+        public static final long serialVersionUID = 1;
         public final String who;
         public WhoToGreet(String who) {
             this.who = who;
@@ -18,6 +21,7 @@ public class HelloAkka {
     }
 
     public static class Greeting implements Serializable {
+        public static final long serialVersionUID = 1;
         public final String message;
         public Greeting(String message) {
             this.message = message;
@@ -27,11 +31,11 @@ public class HelloAkka {
     public static class Greeter extends AbstractActor {
         String greeting = "";
 
-        @Override public PartialFunction<Object, BoxedUnit> receive() {
-            return ReceiveBuilder.
-                    match(WhoToGreet.class, message -> greeting = "hello, " + message.who).
-                    match(Greet.class, message -> sender().tell(new Greeting(greeting), self())).
-                    build();
+        public Greeter() {
+            receive(ReceiveBuilder.
+                match(WhoToGreet.class, message -> greeting = "hello, " + message.who).
+                match(Greet.class, message -> sender().tell(new Greeting(greeting), self())).
+                build());
         }
     }
 
